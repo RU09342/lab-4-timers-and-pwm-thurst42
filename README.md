@@ -51,4 +51,26 @@ PWM lab.
 
 No known errors exist.
 
+# HARDWARE PWM
+
+##Introduction 
+
+The purpose of this lab is create a PWM wavefrom that can control the brightness of an LED using two timer modules. 
+TimerA is used in upmode defaulting to a 50% duty cycle for a 1 kHz wavefoem ( value of 1000).The duty cycle of a PWM is on time/off time,
+it the timer will count to CCR0 (value ) using CCR1, which sets the period by turning on the LED and then turning 
+off the LED using CCR1 compare mode at a value less than CCR0. Each button press increases 
+CCR1 by 100, and since CCR0 is 1000,  press increases the duty cycle by 10%. 
+
+
+##Implimented Devices
+* MSP430F5529
+* MSP430FR2311
+* MSP430FR5994
+* MSP430FR6989
+* MSP430G2553
+
+##Errors
+
+No known errors exist.
+
 

@@ -6,15 +6,15 @@
  */
 int main(void) {
     WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
-
+    PM5CTL0 &= ~LOCKLPM5;
 
     P1DIR |= BIT0;// pin output
     P1OUT |= BIT0; //turn on LED
-    P1DIR |= BIT6;// P1.6 pin output
-    P1OUT |= BIT6;//turn on LED
+    P1DIR |= BIT1;// P1.6 pin output
+    P1OUT |= BIT1;//turn on LED
 
-    P1REN |= BIT3; //Enable resistor for pin 1.3.
-    P1OUT |= BIT3;
+    P5REN |= BIT5; //Enable resistor for pin 1.3.
+    P5OUT |= BIT5;
 
 
     TA0CTL |= TAIE; //enable TA0 interrupt
@@ -32,12 +32,12 @@ int main(void) {
     __bis_SR_register(GIE);  //not low power mode
     while(1){
 
-        if ((P1IN & BIT3) != BIT3) { //Listen for button presses.
-            P1OUT |= BIT6;
+        if ((P5IN & BIT5) != BIT5) { //Listen for button presses.
+            P1OUT |= BIT1;
             __delay_cycles(200000);
             TA0CCR1 = TA0CCR1 + 100; //Increment the PWM period
         if (TA0CCR1 > 1000) { TA0CCR1 = 0; }
-        else {P1OUT &= ~BIT6;}
+        else {P1OUT &= ~BIT1;}
 
         }
 
@@ -60,4 +60,3 @@ __interrupt void Timer0_A1_ISR(void) { //a1 interrupt
   //  break;
     }
 }
-

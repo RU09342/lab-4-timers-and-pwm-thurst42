@@ -11,7 +11,7 @@ GEN_CMDS__FLAG :=
 
 ORDERED_OBJS += \
 "./main.obj" \
-"../lnk_msp430g2553.cmd" \
+"../lnk_msp430fr2311.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
 
@@ -120,33 +120,33 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-SOFTWARE_PWM.out \
+SOFTWARE_DEBOUNCE.out \
 
 EXE_OUTPUTS__QUOTED += \
-"SOFTWARE_PWM.out" \
+"SOFTWARE_DEBOUNCE.out" \
 
 BIN_OUTPUTS += \
-SOFTWARE_PWM.hex \
+SOFTWARE_DEBOUNCE.hex \
 
 BIN_OUTPUTS__QUOTED += \
-"SOFTWARE_PWM.hex" \
+"SOFTWARE_DEBOUNCE.hex" \
 
 
 # All Target
 all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
-	@$(MAKE) --no-print-directory -Onone "SOFTWARE_PWM.out"
+	@$(MAKE) --no-print-directory -Onone "SOFTWARE_DEBOUNCE.out"
 
 # Tool invocations
-SOFTWARE_PWM.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
+SOFTWARE_DEBOUNCE.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MSP430 Linker'
-	"C:/ti/ccsv7/tools/compiler/ti-cgt-msp430_16.9.4.LTS/bin/cl430" -vmsp --use_hw_mpy=none --advice:power=all --define=__MSP430G2553__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number -z -m"SOFTWARE_PWM.map" --heap_size=80 --stack_size=80 -i"C:/ti/ccsv7/ccs_base/msp430/include" -i"C:/ti/ccsv7/tools/compiler/ti-cgt-msp430_16.9.4.LTS/lib" -i"C:/ti/ccsv7/tools/compiler/ti-cgt-msp430_16.9.4.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="SOFTWARE_PWM_linkInfo.xml" --use_hw_mpy=none --rom_model -o "SOFTWARE_PWM.out" $(ORDERED_OBJS)
+	"C:/ti/ccsv7/tools/compiler/ti-cgt-msp430_16.9.4.LTS/bin/cl430" -vmspx --use_hw_mpy=none --advice:power=all --advice:hw_config=all --define=__MSP430FR2311__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 -z -m"SOFTWARE_DEBOUNCE.map" --heap_size=160 --stack_size=160 --cinit_hold_wdt=on -i"C:/ti/ccsv7/ccs_base/msp430/include" -i"C:/ti/ccsv7/tools/compiler/ti-cgt-msp430_16.9.4.LTS/lib" -i"C:/ti/ccsv7/tools/compiler/ti-cgt-msp430_16.9.4.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="SOFTWARE_DEBOUNCE_linkInfo.xml" --use_hw_mpy=none --rom_model -o "SOFTWARE_DEBOUNCE.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-SOFTWARE_PWM.hex: $(EXE_OUTPUTS)
+SOFTWARE_DEBOUNCE.hex: $(EXE_OUTPUTS)
 	@echo 'Invoking: MSP430 Hex Utility'
-	"C:/ti/ccsv7/tools/compiler/ti-cgt-msp430_16.9.4.LTS/bin/hex430" --memwidth=8 --romwidth=8 -o "SOFTWARE_PWM.hex" $(EXE_OUTPUTS__QUOTED)
+	"C:/ti/ccsv7/tools/compiler/ti-cgt-msp430_16.9.4.LTS/bin/hex430" --memwidth=8 --romwidth=8 -o "SOFTWARE_DEBOUNCE.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $@'
 	@echo ' '
 
